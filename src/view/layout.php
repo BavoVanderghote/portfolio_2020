@@ -21,7 +21,7 @@
         }
       ?>
 
-      <section>
+      <section class="container">
         <?php echo $content;?>
         </section>
     <?php echo $js; ?>
