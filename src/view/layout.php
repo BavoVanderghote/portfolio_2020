@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap" rel="stylesheet">
     <title><?php echo $title; ?> | B</title>
     <?php echo $css;?>
   </head>
   <body>
     <header>
-      <h1>Bavo Vanderghote portfolio</h1>
+      <h1 class="hide">Bavo Vanderghote portfolio</h1>
     </header>
       <?php
         if(!empty($_SESSION['error'])) {
