@@ -21,7 +21,7 @@
         }
       ?>
 
-      <section class="players">
+      <section>
         <?php echo $content;?>
         </section>
     <?php echo $js; ?>
