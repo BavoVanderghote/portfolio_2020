@@ -40,11 +40,23 @@ body {
   fill: var(--primary-color);
 }
 
+.svg-stroke {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 5;
+  stroke-miterlimit: 10;
+}
+
 /* CONTAINERS */
 
 .container {
   padding: 2rem;
   height: 100%;
+}
+
+.content {
+  padding-top: 5rem;
+  padding-bottom: 2rem;
 }
 
 .container--contact {
@@ -69,6 +81,11 @@ body {
   justify-self: center;
   align-self: center;
   font-size: 15rem;
+}
+
+.title--work {
+  font-size: 6rem;
+  padding-top: 1rem;
 }
 
 .link {
@@ -104,7 +121,7 @@ body {
   position: absolute;
 }
 
-/* ABOUT */
+/* NAVIGATION BOUT */
 
 .menu__element--about {
   width: 50%;
@@ -144,7 +161,7 @@ body {
   z-index: 10;
 }
 
-/* WORK */
+/* NAVIGATION WORK */
 
 .menu__element--work {
   width: 50%;
@@ -184,7 +201,7 @@ body {
   z-index: 10;
 }
 
-/* CONTACT */
+/* NAVIGATION CONTACT */
 
 .menu__element--contact {
   font-size: 4rem;
@@ -209,10 +226,13 @@ body {
 /* ABOUT */
 
 .photo-grid {
-  padding-top: 5rem;
+  display: grid;
+  grid-gap: 2rem;
 }
 
-.photo-grid__grid {
+/* WORK */
+
+.projects-grid {
   display: grid;
   grid-gap: 2rem;
 }

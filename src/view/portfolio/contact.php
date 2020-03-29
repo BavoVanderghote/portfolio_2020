@@ -1,8 +1,12 @@
 <div class="container--contact">
   <nav>
     <a href="?bavo-says=let-s-go-home">
-      <svg width="245" height="71" viewBox="0 0 245 71" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M244.5 35.5H4M4 35.5L43.0074 2M4 35.5L43.0074 69" stroke="#477377" stroke-width="5"/>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="243px"
+        height="69.9px" viewBox="0 0 243 69.9" style="enable-background:new 0 0 243 69.9;" xml:space="preserve">
+      <defs>
+      </defs>
+      <line class="svg-stroke" x1="243" y1="34.3" x2="3.5" y2="35"/>
+      <polyline class="svg-stroke" points="36.7,1.8 3.5,35 36.7,68.1 "/>
       </svg>
     </a>
   </nav>
