@@ -4,6 +4,13 @@ require_once( __DIR__ . '/DAO.php');
 
 class PortfolioDAO extends DAO {
 
+  public function selectProjects(){
+    $sql = "SELECT * FROM `projects`";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   // public function search($term){
   //   $sql = "SELECT * FROM `players` where Name like :term limit 25";
   //   $stmt = $this->pdo->prepare($sql);

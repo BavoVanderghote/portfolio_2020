@@ -12,7 +12,7 @@ if (file_exists("../.env")) {
 }
 
 $routes = array(
-  'home' => array(
+  'let-s-go-home' => array(
     'controller' => 'Portfolio',
     'action' => 'index'
   ),
@@ -24,21 +24,21 @@ $routes = array(
     'controller' => 'Portfolio',
     'action' => 'contact'
   ),
-  'work' => array(
+  'i-made-this' => array(
     'controller' => 'Portfolio',
     'action' => 'work'
   )
 );
 
-if(empty($_GET['page'])) {
-  $_GET['page'] = 'home';
+if(empty($_GET['bavo-says'])) {
+  $_GET['bavo-says'] = 'let-s-go-home';
 }
-if(empty($routes[$_GET['page']])) {
+if(empty($routes[$_GET['bavo-says']])) {
   header('Location: index.php');
   exit();
 }
 
-$route = $routes[$_GET['page']];
+$route = $routes[$_GET['bavo-says']];
 $controllerName = $route['controller'] . 'Controller';
 
 require_once __DIR__ . '/controller/' . $controllerName . ".php";
