@@ -5,7 +5,7 @@ require_once( __DIR__ . '/DAO.php');
 class PortfolioDAO extends DAO {
 
   public function selectProjects(){
-    $sql = "SELECT * FROM `projects`";
+    $sql = "SELECT * FROM `projects` ORDER BY rating DESC";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

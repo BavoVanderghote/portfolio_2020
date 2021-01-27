@@ -40,7 +40,7 @@ class PortfolioController extends Controller {
     $projects = $this->portfolioDAO->selectProjects();
 
     $this->set('title', "I made this");
-    $this->set('description', "Sometimes I make stuff. Mainly digital products and motion videos, but there's more to come!");
+    $this->set('description', "I make stuff. Mainly digital products and motion films, but there's more to come!");
     $this->set('projects', $projects);
 
     if (strtolower($_SERVER['HTTP_ACCEPT']) == 'application/json') {
