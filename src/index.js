@@ -1,17 +1,16 @@
 require(`./style.css`);
 
 {
-
   const defaultMax = 80; // e⁶ / 12 = 33.5em
   let randomizing = false;
 
-  const $filterElements = document.querySelectorAll('.svg-filter');
-  const turbVal = {val: 0.000001};
-  const turb = document.querySelectorAll('#filter feTurbulence')[0];
+  const $filterElements = document.querySelectorAll(".svg-filter");
+  const turbVal = { val: 0.000001 };
+  const turb = document.querySelectorAll("#filter feTurbulence")[0];
 
   let svgTlUp, svgTlDown, svgTlLoop;
 
-  const $mouseText = document.querySelector('.mouse');
+  const $mouseText = document.querySelector(".mouse");
 
   const $hoverImages = document.querySelectorAll(`.hover--alt`);
   const $hoverPink = document.querySelectorAll(`.hover--pink`);
@@ -23,13 +22,12 @@ require(`./style.css`);
       if (!randomizing) {
         randomize();
       }
-    }
-    else {
+    } else {
       if (randomizing) {
         randomizing = false;
       }
       const $posts = document.querySelectorAll(`.posts`);
-      $posts.forEach($post => {
+      $posts.forEach(($post) => {
         $post.style.margin = `0`;
         $post.style.width = `100%`;
       });
@@ -39,35 +37,37 @@ require(`./style.css`);
   const grid = () => {
     const colcade = new Colcade(`.grid`, {
       columns: `.grid-col`,
-      items: `.grid-item`
+      items: `.grid-item`,
     });
   };
 
   // random buffer to give for spacing.
   // growth is inverse exponential, so larger is less likely
   const buffer = (min = 0.1, max = defaultMax, mult = 1) => {
-    return `${Math.min(max, Math.max(min, min / 2 + Math.exp(Math.random() * 6) * Math.random() * mult / 12))}em`;
+    return `${Math.min(
+      max,
+      Math.max(
+        min,
+        min / 2 + (Math.exp(Math.random() * 6) * Math.random() * mult) / 12
+      )
+    )}em`;
   };
 
   const randomBuffer = (min = 0.1, max = defaultMax) => {
-
     return `${Math.floor(Math.random() * (max - min + 1)) + min}em`;
   };
 
   const randomize = () => {
-
     randomizing = true;
 
     const $posts = document.querySelectorAll(`.posts`);
 
     // console.log($posts);
 
-
-    $posts.forEach($post => {
+    $posts.forEach(($post) => {
       // console.log($post);
 
       // console.log(`${buffer(0.1, defaultMax, 0.5)} ${buffer(0.25)} ${buffer(0.25, defaultMax, 0.5)} ${buffer()}`);
-
 
       // random buffered margins, ordered: top right bottom left.
       // top is at least 0.1em, right and bottom are at least 0.25em.
@@ -79,8 +79,6 @@ require(`./style.css`);
       // console.log(`width: ${buffer(50, defaultMax, 10)}`);
       $post.style.width = randomBuffer(30, defaultMax, 1);
       // $post.style.height = buffer(5);
-
-
     });
     // for (let p = 0; p < posts.length; p++) {
     //   // random buffered margins, ordered: top right bottom left.
@@ -97,15 +95,15 @@ require(`./style.css`);
   };
 
   const animationUpUpdate = () => {
-    turb.setAttribute('baseFrequency', `${turbVal.val / 4} ${turbVal.val}`);
+    turb.setAttribute("baseFrequency", `${turbVal.val / 4} ${turbVal.val}`);
   };
 
   const animationDownUpdate = () => {
-    turb.setAttribute('baseFrequency', `${turbVal.val} ${turbVal.val}`);
+    turb.setAttribute("baseFrequency", `${turbVal.val} ${turbVal.val}`);
   };
 
   const animationLoopUpdate = () => {
-    turb.setAttribute('baseFrequency', `${turbVal.val / 8} ${turbVal.val}`);
+    turb.setAttribute("baseFrequency", `${turbVal.val / 8} ${turbVal.val}`);
   };
 
   // animation complete callbacks
@@ -117,8 +115,7 @@ require(`./style.css`);
     svgTlLoop.restart();
   };
 
-  const animationDownCompleted = () => {
-  };
+  const animationDownCompleted = () => {};
 
   const animationLoopCompleted = () => {
     // on complete, restart loop
@@ -126,36 +123,60 @@ require(`./style.css`);
   };
 
   const filter = () => {
-
     // intro timeline
     svgTlUp = new TimelineLite({
-      paused: true, onUpdate: animationUpUpdate, onComplete: animationUpCompleted
+      paused: true,
+      onUpdate: animationUpUpdate,
+      onComplete: animationUpCompleted,
     });
     // exit animation timeline
     svgTlDown = new TimelineLite({
-      paused: true, onUpdate: animationDownUpdate, onComplete: animationDownCompleted
+      paused: true,
+      onUpdate: animationDownUpdate,
+      onComplete: animationDownCompleted,
     });
     // continious loop timeline
     svgTlLoop = new TimelineLite({
-      paused: true, onUpdate: animationLoopUpdate, onComplete: animationLoopCompleted
+      paused: true,
+      onUpdate: animationLoopUpdate,
+      onComplete: animationLoopCompleted,
     });
 
     // intro animation
     // when starting to hover value goes to 0.2 in 0.8s
-    svgTlUp.to(turbVal, .2, {ease: Power0.easeIn, val: .2});
+    svgTlUp.to(turbVal, 0.2, { ease: Power0.easeIn, val: 0.2 });
 
     // exit animation
     // when stopping to hover, val takes 0.2s to drop down to 0.000001
-    svgTlDown.to(turbVal, .2, {val: 0.000001});
+    svgTlDown.to(turbVal, 0.2, { val: 0.000001 });
 
     // horizontal loop
     // rough easing for randomness
-    svgTlLoop.to(turbVal, .12, {ease: RoughEase.ease.config({template: Power0.easeOut, strength: 1, points: 20, taper: `none`, randomize: true, clamp: false}), val: .3});
-    svgTlLoop.to(turbVal, .12, {ease: RoughEase.ease.config({template: Power0.easeOut, strength: 1, points: 20, taper: `none`, randomize: true, clamp: false}), val: .2});
+    svgTlLoop.to(turbVal, 0.12, {
+      ease: RoughEase.ease.config({
+        template: Power0.easeOut,
+        strength: 1,
+        points: 20,
+        taper: `none`,
+        randomize: true,
+        clamp: false,
+      }),
+      val: 0.3,
+    });
+    svgTlLoop.to(turbVal, 0.12, {
+      ease: RoughEase.ease.config({
+        template: Power0.easeOut,
+        strength: 1,
+        points: 20,
+        taper: `none`,
+        randomize: true,
+        clamp: false,
+      }),
+      val: 0.2,
+    });
 
-    $filterElements.forEach($e => {
-
-      $e.addEventListener('mouseover', () => {
+    $filterElements.forEach(($e) => {
+      $e.addEventListener("mouseover", () => {
         // $e.style.- webkit - filter = url("#filter");
         // $e.style.filter = 'url("#filter")';
         $e.classList.add(`svg-filter--active`);
@@ -169,8 +190,8 @@ require(`./style.css`);
         // svgTlLoop.restart();
       });
 
-      $e.addEventListener('mouseleave', () => {
-        setTimeout(function() {
+      $e.addEventListener("mouseleave", () => {
+        setTimeout(function () {
           // $e.style.filter = '';
           $e.classList.remove(`svg-filter--active`);
         }, 200);
@@ -185,28 +206,23 @@ require(`./style.css`);
     });
   };
 
-  const handleClicktrigger = e => {
+  const handleClicktrigger = (e) => {
     // prevent default behavior for a-tags, button tags, etc.
     e.preventDefault();
-    console.log(e.currentTarget);
 
     // Grab the video ID from the element clicked
     const id = e.currentTarget.getAttribute(`data-youtube-id`);
-    console.log(id);
-
 
     // Autoplay when the modal appears
     // Note: this is intenionally disabled on most mobile devices
     // If critical on mobile, then some alternate method is needed
-    const autoplay = '?autoplay=1';
+    const autoplay = "?autoplay=1";
 
     // Don't show the 'Related Videos' view when the video ends
-    const relatedNo = '&rel=0';
+    const relatedNo = "&rel=0";
 
     // String the ID and param variables together
     const src = `//www.youtube.com/embed/${id}${autoplay}${relatedNo}`;
-    console.log(src);
-
 
     // Pass the YouTube video ID into the iframe template...
     // Set the source on the iframe to match the video ID
@@ -217,12 +233,10 @@ require(`./style.css`);
     const $body = document.querySelector(`body`);
     $body.classList.add(`show-video-modal`);
     $body.classList.add(`noscroll`);
-
   };
 
   // Close and Reset the Video Modal
   const closeVideoModal = () => {
-
     event.preventDefault();
 
     // re-hide the video modal
@@ -233,11 +247,9 @@ require(`./style.css`);
     // reset the source attribute for the iframe template, kills the video
     const $modal = document.querySelector(`#youtube`);
     $modal.setAttribute(`src`, ``);
-
   };
 
-  const handleKeyupEsc = e => {
-
+  const handleKeyupEsc = (e) => {
     // ESC key maps to keycode `27`
     if (e.keyCode === 27) {
       // call the close and reset function
@@ -248,23 +260,33 @@ require(`./style.css`);
   const toggleVideoModal = () => {
     const $triggers = document.querySelectorAll(`.js-trigger-video-modal`);
 
-    $triggers.forEach($trigger => {
-
+    $triggers.forEach(($trigger) => {
       // Click on video thumbnail or link
       $trigger.addEventListener(`click`, handleClicktrigger);
-
     });
 
     // if the 'close' button/element, or the overlay are clicked
-    document.querySelector(`.close-video-modal`).addEventListener(`click`, closeVideoModal);
-    document.querySelector(`.video-modal .overlay`).addEventListener(`click`, closeVideoModal);
+    document
+      .querySelector(`.close-video-modal`)
+      .addEventListener(`click`, closeVideoModal);
+    document
+      .querySelector(`.video-modal .overlay`)
+      .addEventListener(`click`, closeVideoModal);
 
     document.querySelector(`body`).addEventListener(`keyup`, handleKeyupEsc);
   };
 
+  const handleElementClick = (e) => {
+    if (e.currentTarget.dataset.clicked === `false`) {
+      e.preventDefault();
+      e.currentTarget.setAttribute(`data-clicked`, `true`);
+    } else {
+      e.currentTarget.setAttribute(`data-clicked`, `false`);
+    }
+  };
 
   const init = () => {
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
     if (window.innerWidth >= 888) {
       randomize();
     }
@@ -272,32 +294,51 @@ require(`./style.css`);
       grid();
     }
 
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
       filter();
     });
 
-    document.addEventListener('mousemove', function (ev) {
-      $mouseText.style.transform = `translateY(${ev.clientY + 35}px)`;
-      $mouseText.style.transform += `translateX(${ev.clientX + 45}px)`;
-    }, false);
+    document.addEventListener(
+      "mousemove",
+      function (ev) {
+        if (window.innerWidth < 704) {
+          $mouseText.style.transform = `translateY(${
+            ev.clientY + window.pageYOffset + 2
+          }px)`;
+          $mouseText.style.transform += `translateX(${ev.clientX + 2}px)`;
+        } else {
+          $mouseText.style.transform = `translateY(${ev.clientY + 35}px)`;
+          $mouseText.style.transform += `translateX(${ev.clientX + 45}px)`;
+        }
+      },
+      false
+    );
 
-    $hoverImages.forEach($image => {
+    $hoverImages.forEach(($image) => {
       $image.parentElement.parentElement.addEventListener(`mouseover`, () => {
-        $mouseText.innerHTML = `${$image.getAttribute(`alt`)} ${$image.parentElement.parentElement.getAttribute(`data-project-tip`) ? `<span class="mouse__tooltip">${$image.parentElement.parentElement.getAttribute(`data-project-tip`)}</span>` : ``}`;
-        console.log($mouseText.textContent);
-
+        $mouseText.innerHTML = `${$image.getAttribute(`alt`)} ${
+          $image.parentElement.parentElement.getAttribute(`data-project-tip`)
+            ? `<span class="mouse__tooltip">${$image.parentElement.parentElement.getAttribute(
+                `data-project-tip`
+              )}</span>`
+            : ``
+        }`;
       });
       $image.parentElement.parentElement.addEventListener(`mouseout`, () => {
         $mouseText.textContent = ``;
       });
     });
 
-    $hoverPink.forEach($image => {
+    $hoverPink.forEach(($image) => {
       $image.parentElement.parentElement.addEventListener(`mouseover`, () => {
         $mouseText.classList.add(`mouse--image`);
-        $mouseText.innerHTML = `${$image.getAttribute(`alt`)} ${$image.parentElement.parentElement.getAttribute(`data-project-tip`) ? `<span class="mouse__tooltip">${$image.parentElement.parentElement.getAttribute(`data-project-tip`)}</span>` : ``}`;
-        console.log($mouseText.textContent);
-
+        $mouseText.innerHTML = `${$image.getAttribute(`alt`)} ${
+          $image.parentElement.parentElement.getAttribute(`data-project-tip`)
+            ? `<span class="mouse__tooltip">${$image.parentElement.parentElement.getAttribute(
+                `data-project-tip`
+              )}</span>`
+            : ``
+        }`;
       });
       $image.parentElement.parentElement.addEventListener(`mouseout`, () => {
         $mouseText.textContent = ``;
@@ -305,7 +346,7 @@ require(`./style.css`);
       });
     });
 
-    $hoverElements.forEach($elem => {
+    $hoverElements.forEach(($elem) => {
       $elem.addEventListener(`mouseover`, () => {
         $mouseText.textContent = $elem.getAttribute(`data-alt`);
       });
@@ -316,12 +357,10 @@ require(`./style.css`);
 
     toggleVideoModal();
 
+    document.querySelectorAll(`.projects__item a`).forEach(($item) => {
+      $item.addEventListener(`click`, handleElementClick);
+    });
   };
 
   init();
 }
-
-
-
-
-

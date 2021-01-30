@@ -11,6 +11,9 @@ class Controller {
       $this->env = 'production';
     }
     call_user_func(array($this, $this->route['action']));
+
+    $this->set('siteUrlRoot', str_replace('//', '/', dirname($_SERVER['SCRIPT_NAME']) . '/'));
+    call_user_func(array($this, $this->route['action']));
   }
 
   public function render() {
