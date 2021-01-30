@@ -2,6 +2,6 @@
 
 ## Bavo Vanderghote
 
-This project is very much under construction.
+This is a portfoliowebsite. 
 
-Building more content...
+You can find it here: https://bavovanderghote.be/
