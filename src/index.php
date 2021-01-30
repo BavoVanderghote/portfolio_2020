@@ -27,7 +27,11 @@ $routes = array(
   'i-made-this' => array(
     'controller' => 'Portfolio',
     'action' => 'work'
-  )
+  ),
+  'this-is-a-project' => array(
+    'controller' => 'Portfolio',
+    'action' => 'detail'
+  ),
 );
 
 if(empty($_GET['bavo-says'])) {

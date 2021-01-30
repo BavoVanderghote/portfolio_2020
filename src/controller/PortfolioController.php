@@ -51,6 +51,30 @@ class PortfolioController extends Controller {
     }
   }
 
+  public function detail() {
+    if(empty($_GET['id']) || !$work = $this->portfolioDAO->selectById($_GET['id'])) {
+      header('Location: index.php?bavo-says=i-made-this');
+    }
+    if(empty($_GET['id']) || !$tools = $this->portfolioDAO->selectToolsById($_GET['id'])) {
+      header('Location: index.php?bavo-says=i-made-this');
+    }
+
+    // if(!empty($_GET['id']) || !$ratings = $this->ratingDAO->selectByTourId($_GET['id'])) {
+    //   $this->_handleGetRating($_GET['id']);
+    // }
+
+    $this->set('title', $work['name']);
+    $this->set('project', $work);
+    $this->set('tools', $tools);
+
+    if (strtolower($_SERVER['HTTP_ACCEPT']) == 'application/json') {
+
+      header('Content-Type: application/json');
+      echo json_encode($images);
+      exit();
+    }
+  }
+
   // public function test() {
   //   $testItems = $this->testDAO->selectTestITems();
 
