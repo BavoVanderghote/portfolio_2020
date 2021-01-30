@@ -20,8 +20,10 @@
         $string = strtolower(str_replace(' ', '', $project["name"]));
         ?>
       <li class="projects__item posts">
-        <a href="<?php if ($project["url"]) echo $project["url"]; elseif ($project["embed_url"]) echo $project["embed_url"]; ?>" target="blank" class="image__container link <?php if ($project["video_id1"]) echo "js-trigger-video-modal"; ?>" <?php if ($project["video_id1"]) echo 'data-youtube-id="'.$project["video_id1"].'"'; ?> data-project-tip="<?php echo $project["tip"] ?>" data-clicked="false">
-
+        <a href="<?php echo $siteUrlRoot;?>?bavo-says=this-is-a-project&id=<?php echo $project['id']; ?>" target="blank" class="image__container link"?>">
+        <?php
+        // if ($project["url"]) echo $project["url"]; elseif ($project["embed_url"]) echo $project["embed_url"];
+        ?>
 
 
           <h3 class="hide"><?php echo $project["name"]; ?></h3>
@@ -38,7 +40,7 @@
           </picture>
           <div class="image__overlay"></div>
           <?php if ($project["url_behance"]): ?>
-          <a class="projects__behance hover--data" href="<?php echo $project["url_behance"]; ?>" target="blank" data-alt="View on behance">
+          <a class="projects__behance projects__behance--dynamic hover--data" href="<?php echo $project["url_behance"]; ?>" target="blank" data-alt="View on behance">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px"
               height="30px" viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
             <defs>
