@@ -68,7 +68,7 @@
       </a>
     <?php endif; ?>
     <?php if ($project["url"]): ?>
-    <a class="projects__behance projects__behance--static hover--data svg-fiter" target="_blank" href="<?php echo $project["url"]; ?>" target="blank" data-alt="Visit the website">
+    <a class="projects__behance projects__behance--static hover--data svg-fiter" target="_blank" href="<?php echo $project["url"]; ?>" target="blank" data-alt="Visit the <?php echo strtolower($project['type']); ?>">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="1.5" y="1.5" width="27" height="27" rx="7" stroke="#447377" stroke-width="3"/>
         <line x1="1" y1="11" x2="29" y2="11" stroke="#447377" stroke-width="2"/>
