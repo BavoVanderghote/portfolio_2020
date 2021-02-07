@@ -22,7 +22,6 @@
       <li class="projects__item posts">
         <a href="<?php echo $siteUrlRoot;?>?bavo-says=this-is-a-project&id=<?php echo $project['id']; ?>" target="blank" class="image__container link"?>">
         <?php
-        // if ($project["url"]) echo $project["url"]; elseif ($project["embed_url"]) echo $project["embed_url"];
         ?>
 
 

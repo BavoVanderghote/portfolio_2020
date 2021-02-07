@@ -20,9 +20,19 @@
   </nav>
   <section class="content content--detail">
     <h2 class="title title--work detail__type container"><?php echo $project['name']; ?></h2>
-    <h3 class="subtitle detail__type container">Briefing & idea</h3>
+    <?php if ($project['tag'] == 'School project'): ?>
+    <h3 class="subtitle detail__type container">Briefing & project</h3>
+    <?php else: ?>
+    <h3 class="subtitle detail__type container">About this project</h3>
+    <?php endif; ?>
+    <?php if (substr($project['briefing'], 0, 1) != '<'): ?>
     <p class="text--body detail__type container"><?php echo $project['briefing'] ?></p>
+    <?php else: echo $project['briefing']; ?>
+    <?php endif; ?>
+    <?php if (substr($project['execution'], 0, 1) != '<'): ?>
     <p class="text--body detail__type container"><?php echo $project['execution'] ?></p>
+    <?php else: echo $project['execution']; ?>
+    <?php endif; ?>
     <p class="text--body detail__type container"><?php echo date( "Y" , strtotime($project['year']) ); ?></p>
     <p class="text--body detail__type container"><?php echo $project['tag']; ?></p>
     <div class="detail__type container">
@@ -30,7 +40,7 @@
         <img class="image--tool" src="./assets/tools/<?php echo strtolower($tool['name']); ?>.png" width="64" height="64" alt="<?php echo $tool['name'] ?>">
       <?php } ?>
     </div>
-  <a class="aspect-ratio__box image__container link image--detail <?php if ($project["video_id1"]) echo "js-trigger-video-modal"; ?>" <?php if ($project["video_id1"]) echo 'data-youtube-id="'.$project["video_id1"].'"'; ?> data-project-tip="<?php echo $project["tip"] ?>" data-clicked="false" target="blank" >
+  <a class="aspect-ratio__box image__container link image--detail " data-project-tip="<?php echo $project["tip"] ?>" target="blank" >
   <picture class="aspect-ratio__box--inside">
     <?php $string = strtolower(str_replace(' ', '', $project["name"])); ?>
     <source
@@ -68,7 +78,7 @@
       </a>
     <?php endif; ?>
     <?php if ($project["url"]): ?>
-    <a class="projects__behance projects__behance--static hover--data svg-fiter" target="_blank" href="<?php echo $project["url"]; ?>" target="blank" data-alt="Visit the <?php echo strtolower($project['type']); ?>">
+    <a class="projects__behance projects__behance--static hover--data svg-fiter" target="_blank" href="<?php echo $project["url"]; ?>" target="blank" data-alt="<?php echo ($project['type'] == 'Web game')?  'Play' : 'Visit'; ?> the <?php echo strtolower($project['type']); ?>">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="1.5" y="1.5" width="27" height="27" rx="7" stroke="#447377" stroke-width="3"/>
         <line x1="1" y1="11" x2="29" y2="11" stroke="#447377" stroke-width="2"/>
@@ -77,6 +87,79 @@
         <circle cx="16.5" cy="7.5" r="1.5" fill="#447377"/>
       </svg>
     </a>
+    <?php endif; ?>
+    <?php if ($project["embed_url"]): ?>
+    <a class="projects__behance projects__behance--static hover--data svg-fiter <?php if ($project["video_id1"]) {echo "js-trigger-video-modal";} ?>" <?php if ($project["video_id1"]) {echo 'data-youtube-id="'.$project["video_id1"].'"';} ?> data-clicked="false" target="_blank" href="<?php echo $project["embed_url"]; ?>" target="blank" data-alt="Watch the video">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1.5" y="1.5" width="27" height="27" rx="6.5" stroke="#447377" stroke-width="3"/>
+        <path d="M11 18.8087V11.1913C11 10.4307 11.8155 9.94851 12.4819 10.3151L19.4069 14.1238C20.0977 14.5037 20.0977 15.4963 19.4069 15.8762L12.4819 19.6849C11.8155 20.0515 11 19.5693 11 18.8087Z" fill="#447377"/>
+      </svg>
+    </a>
+    <?php endif; ?>
+    <?php if ($project["app"]): ?>
+    <a class="projects__behance projects__behance--static hover--data svg-fiter" data-clicked="false" target="_blank" href="./assets/downloads/<?php echo $project["app"]; ?>.apk" data-alt="Download the Planes APK" download>
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1.5" y="1.5" width="27" height="27" rx="6.5" stroke="#447377" stroke-width="3"/>
+        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask0)">
+        <path d="M20 18L17 15L20.5 11.5L22.5 11L25 15.5L20 18Z" fill="#447377"/>
+        </g>
+        <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask1)">
+        <path d="M17 15L8.5 23.5L10 24L20 18L17 15Z" fill="#447377"/>
+        </g>
+        <mask id="mask2" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask2)">
+        <path d="M17 15L8.5 23.5L10 24L20 18L17 15Z" fill="black" fill-opacity="0.25"/>
+        </g>
+        <mask id="mask3" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask3)">
+        <path d="M17 15L8.5 6.5L10 5.5L20.5 11.5L17 15Z" fill="#447377"/>
+        </g>
+        <mask id="mask4" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask4)">
+        <path d="M17 15L8.5 6.5L10 5.5L20.5 11.5L17 15Z" fill="black" fill-opacity="0.08"/>
+        </g>
+        <mask id="mask5" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask5)">
+        <path d="M17 15L8.5 6.5L8 24L17 15Z" fill="#447377"/>
+        </g>
+        <mask id="mask6" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="16" height="18">
+        <path d="M8.5 22.2902V7.70985C8.5 6.94502 9.32366 6.46331 9.99026 6.83827L22.9505 14.1284C23.6302 14.5107 23.6302 15.4893 22.9505 15.8716L9.99026 23.1617C9.32366 23.5367 8.5 23.055 8.5 22.2902Z" fill="#447377"/>
+        </mask>
+        <g mask="url(#mask6)">
+        <path d="M17 15L8.5 6.5L8 24L17 15Z" fill="black" fill-opacity="0.17"/>
+        </g>
+      </svg>
+    </a>
+    <?php if ($project["embed_url"]): ?>
+    <a class="projects__behance projects__behance--static hover--data svg-fiter <?php if ($project["video_id1"]) {echo "js-trigger-video-modal";} ?>" <?php if ($project["video_id1"]) {echo 'data-youtube-id="'.$project["video_id1"].'"';} ?> data-clicked="false" target="_blank" href="<?php echo $project["embed_url"]; ?>" target="blank" data-alt="Watch the video">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1.5" y="1.5" width="27" height="27" rx="6.5" stroke="#447377" stroke-width="3"/>
+        <path d="M11 18.8087V11.1913C11 10.4307 11.8155 9.94851 12.4819 10.3151L19.4069 14.1238C20.0977 14.5037 20.0977 15.4963 19.4069 15.8762L12.4819 19.6849C11.8155 20.0515 11 19.5693 11 18.8087Z" fill="#447377"/>
+      </svg>
+    </a>
+    <?php endif; ?>
+    <?php if ($project["app"]): ?>
+    <a class="projects__behance projects__behance--static hover--data svg-fiter" data-clicked="false" target="_blank" href="<?php echo $project["url_github"]; ?>" data-alt="View on Github">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="1.5" width="27" height="27" rx="6.5" stroke="#447377" stroke-width="3"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M15 6C10.0275 6 6 10.0275 6 15C6 18.9825 8.57625 22.3463 12.1537 23.5388C12.6037 23.6175 12.7725 23.3475 12.7725 23.1113C12.7725 22.8975 12.7613 22.1888 12.7613 21.435C10.5 21.8513 9.915 20.8837 9.735 20.3775C9.63375 20.1187 9.195 19.32 8.8125 19.1062C8.4975 18.9375 8.0475 18.5212 8.80125 18.51C9.51 18.4987 10.0163 19.1625 10.185 19.4325C10.995 20.7937 12.2888 20.4113 12.8063 20.175C12.885 19.59 13.1212 19.1962 13.38 18.9712C11.3775 18.7462 9.285 17.97 9.285 14.5275C9.285 13.5487 9.63375 12.7387 10.2075 12.1087C10.1175 11.8837 9.8025 10.9612 10.2975 9.72375C10.2975 9.72375 11.0513 9.4875 12.7725 10.6463C13.4925 10.4438 14.2575 10.3425 15.0225 10.3425C15.7875 10.3425 16.5525 10.4438 17.2725 10.6463C18.9938 9.47625 19.7475 9.72375 19.7475 9.72375C20.2425 10.9612 19.9275 11.8837 19.8375 12.1087C20.4113 12.7387 20.76 13.5375 20.76 14.5275C20.76 17.9812 18.6563 18.7462 16.6538 18.9712C16.98 19.2525 17.2613 19.7925 17.2613 20.6363C17.2613 21.84 17.25 22.8075 17.25 23.1113C17.25 23.3475 17.4188 23.6288 17.8688 23.5388C21.4238 22.3463 24 18.9712 24 15C24 10.0275 19.9725 6 15 6Z" fill="#447377"/>
+    </svg>
+    </a>
+    <?php endif; ?>
     <?php endif; ?>
   </div>
 </section>
